@@ -32,7 +32,12 @@ module.exports = {
 							dev: !prod
 						},
 						emitCss: prod,
-						hotReload: !prod
+						hotReload: !prod,
+						onwarn: (warning, handler) => {
+							// disable a11y warnings
+							if (warning.code.startsWith("a11y-")) return;
+							handler(warning);
+						}
 					}
 				}
 			},

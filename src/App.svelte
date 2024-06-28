@@ -1,7 +1,9 @@
 <script>
 	import { onMount } from "svelte";
+	import Bar from "./bar.svelte";
+
 	export let timeArr;
-	let showSec = false;
+	let showSec = localStorage.getItem("showSec") == "true" || false;
 
 	timeArr = getTime().split(":");
 	let timer;
@@ -30,12 +32,11 @@
 	function toggle() {
 		showSec = !showSec;
 		timeArr = getTime().split(":");
+		localStorage.setItem("showSec", showSec);
 	}
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
 <main>
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div class="timeContainer" on:click={toggle}>
 		<h1>
 			{#each timeArr as str, i}
@@ -46,6 +47,7 @@
 			{/each}
 		</h1>
 	</div>
+	<Bar></Bar>
 </main>
 
 <style>
