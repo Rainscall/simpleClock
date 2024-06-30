@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const mode = process.env.NODE_ENV || 'development';
@@ -18,8 +19,8 @@ module.exports = {
 	},
 	output: {
 		path: path.join(__dirname, '/public'),
-		filename: '[name].js',
-		chunkFilename: '[name].[id].js'
+		filename: '[name].[fullhash].js',
+		chunkFilename: '[name].[fullhash].js'
 	},
 	module: {
 		rules: [
@@ -52,8 +53,12 @@ module.exports = {
 	},
 	mode,
 	plugins: [
+		new HtmlWebpackPlugin({
+			template: './public/index.html',
+			filename: 'index.html',
+		}),
 		new MiniCssExtractPlugin({
-			filename: '[name].css'
+			filename: '[name].[fullhash].css'
 		})
 	],
 	devtool: prod ? false : 'source-map',

@@ -1,5 +1,6 @@
 <script>
     import Icon from "@iconify/svelte";
+    import Dialog from "./Dialog.svelte";
 
     function toggleFullScreen() {
         if (document.fullscreenElement) {
@@ -21,6 +22,7 @@
     }
 
     export let showRest = false;
+    export let dialog;
 </script>
 
 <main>
@@ -31,7 +33,35 @@
                     <Icon icon="solar:full-screen-bold"></Icon>
                 </div>
             </div>
+            <div class="rest">
+                <div
+                    on:click={() => {
+                        dialog.showModal();
+                    }}
+                >
+                    <Icon icon="solar:info-circle-bold"></Icon>
+                </div>
+            </div>
         {/if}
+
+        <Dialog bind:dialog>
+            <div class="info">
+                <div>
+                    <h1>Info</h1>
+                    <p>
+                        GitHub: <a
+                            href="https://github.com/Rainscall/simpleClock"
+                            target="_blank"
+                            >https://github.com/Rainscall/simpleClock</a
+                        >
+                    </p>
+                    <div class="ops">
+                        <div on:click={dialog.close()}>close</div>
+                    </div>
+                </div>
+            </div>
+        </Dialog>
+
         <div>
             <Icon icon="solar:settings-bold"></Icon>
         </div>
@@ -43,6 +73,77 @@
         width: 100%;
         display: flex;
     }
+
+    .info {
+        display: flex;
+        height: 100vh;
+        height: 100dvh;
+        width: 100vw;
+        max-width: 100vw;
+        max-height: 100vh;
+        max-height: 100dvh;
+    }
+
+    .info > div {
+        margin: auto;
+        width: 90vw;
+        display: flex;
+        box-sizing: border-box;
+        max-width: 512px;
+        background-color: #fff;
+        border-radius: 1rem;
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.2rem;
+        overflow: hidden;
+    }
+
+    p,
+    h1 {
+        text-align: left;
+    }
+
+    p {
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-weight: 200;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:focus {
+        outline: 0;
+        border: 0;
+    }
+
+    .ops {
+        margin-top: 1rem;
+    }
+
+    .ops > div {
+        display: flex;
+        width: 100%;
+        padding: 0.2rem;
+        background-color: #0000000a;
+        border-radius: 114514px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* hr {
+        height: 2px;
+        border-radius: 114514px;
+        background-color: #0000001c;
+        outline: 0;
+        border: 0;
+    } */
 
     @keyframes ani-bar-in {
         from {
