@@ -20,9 +20,10 @@
     function hide() {
         showRest = false;
     }
-
     export let showRest = false;
     export let dialog;
+    export let buildHash;
+    buildHash = __BUILD_COMMIT_HASH__.substring(0, 7);
 </script>
 
 <main>
@@ -62,7 +63,12 @@
                             >https://github.com/Rainscall/simpleClock</a
                         >
                         <br />
-                        Powered by Svelte
+                        Build:
+                        <span
+                            class="buildInfo"
+                            style="--color:#{buildHash.substring(0, 6)}"
+                            >{buildHash}</span
+                        >
                     </p>
                     <div class="ops">
                         <div
@@ -136,7 +142,6 @@
     a {
         text-decoration: none;
         color: #840d23;
-        font-weight: 400;
     }
 
     a:focus {
@@ -247,6 +252,11 @@
     .rest {
         background-color: #ededed;
         border-radius: 0.6rem;
+    }
+
+    .buildInfo {
+        --color: #000;
+        color: var(--color);
     }
 
     @media (prefers-color-scheme: dark) {

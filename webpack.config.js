@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BuildInfoPlugin = require('build-info-webpack-plugin');
 const path = require('path');
 
 const mode = process.env.NODE_ENV || 'development';
@@ -59,7 +60,8 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin({
 			filename: '[name].[fullhash].css'
-		})
+		}),
+		BuildInfoPlugin
 	],
 	devtool: prod ? false : 'source-map',
 	devServer: {
