@@ -65,6 +65,7 @@
 		padding: 1rem;
 		user-select: none;
 		container-type: inline-size;
+		cursor: pointer;
 	}
 
 	h1 {

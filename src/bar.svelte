@@ -49,14 +49,33 @@
                 <div>
                     <h1>Info</h1>
                     <p>
-                        GitHub: <a
+                        A simple clock designed for old device and give them a
+                        second chance
+                        <br />
+                    </p>
+                    <hr />
+                    <p style="font-size: smaller;line-height:1.4">
+                        GitHub:
+                        <a
                             href="https://github.com/Rainscall/simpleClock"
                             target="_blank"
                             >https://github.com/Rainscall/simpleClock</a
                         >
+                        <br />
+                        Powered by Svelte
                     </p>
                     <div class="ops">
-                        <div on:click={dialog.close()}>close</div>
+                        <div
+                            on:click={async () => {
+                                dialog.dataset.deleted = true;
+                                setTimeout(() => {
+                                    dialog.close();
+                                    dialog.dataset.deleted = false;
+                                }, 235);
+                            }}
+                        >
+                            close
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,14 +126,17 @@
         max-width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
+        font-weight: 200;
     }
 
     h1 {
-        font-weight: 200;
+        font-weight: 300;
     }
 
     a {
         text-decoration: none;
+        color: #840d23;
+        font-weight: 400;
     }
 
     a:focus {
@@ -137,13 +159,14 @@
         justify-content: center;
     }
 
-    /* hr {
-        height: 2px;
+    hr {
+        height: 0.5px;
         border-radius: 114514px;
         background-color: #0000001c;
         outline: 0;
         border: 0;
-    } */
+        margin: 0.6rem 0;
+    }
 
     @keyframes ani-bar-in {
         from {
@@ -227,11 +250,27 @@
     }
 
     @media (prefers-color-scheme: dark) {
+        .info > div,
         .bar {
             background-color: #141414;
         }
         .rest {
             background-color: #000000;
+        }
+        .info > div {
+            color: #fff;
+        }
+
+        .info > div p > a {
+            color: #a8122e;
+        }
+
+        hr {
+            background-color: #ffffff1c;
+        }
+
+        .ops > div {
+            background-color: #ffffff0a;
         }
     }
 </style>
