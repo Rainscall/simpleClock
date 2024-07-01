@@ -1,5 +1,15 @@
 <script>
     export let dialog;
+    export async function closeDialog() {
+        return new Promise((resolve, reject) => {
+            dialog.dataset.deleted = true;
+            setTimeout(() => {
+                dialog.close();
+                dialog.dataset.deleted = false;
+                resolve();
+            }, 235);
+        });
+    }
 </script>
 
 <dialog bind:this={dialog}>

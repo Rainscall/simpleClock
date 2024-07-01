@@ -22,6 +22,7 @@
     }
     export let showRest = false;
     export let dialog;
+    let dialogComponent;
     export let buildHash;
     buildHash = __BUILD_COMMIT_HASH__.substring(0, 7);
 </script>
@@ -45,7 +46,7 @@
             </div>
         {/if}
 
-        <Dialog bind:dialog>
+        <Dialog bind:dialog bind:this={dialogComponent}>
             <div class="info">
                 <div>
                     <h1>Info</h1>
@@ -55,7 +56,9 @@
                         <br />
                     </p>
                     <hr />
-                    <p style="font-size: smaller;line-height:1.4">
+                    <p
+                        style="font-size: smaller;line-height:1.4;font-weight:300;"
+                    >
                         GitHub:
                         <a
                             href="https://github.com/Rainscall/simpleClock"
@@ -71,17 +74,7 @@
                         >
                     </p>
                     <div class="ops">
-                        <div
-                            on:click={async () => {
-                                dialog.dataset.deleted = true;
-                                setTimeout(() => {
-                                    dialog.close();
-                                    dialog.dataset.deleted = false;
-                                }, 235);
-                            }}
-                        >
-                            close
-                        </div>
+                        <div on:click={dialogComponent.closeDialog}>close</div>
                     </div>
                 </div>
             </div>
@@ -132,11 +125,11 @@
         max-width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
-        font-weight: 200;
+        font-weight: 400;
     }
 
     h1 {
-        font-weight: 300;
+        font-weight: 400;
     }
 
     a {
